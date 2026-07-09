@@ -38,6 +38,11 @@ const theme = createTheme({
     fontFamily : 
       // here we put font family name as that exist inside css file (font face) >> this is a mandatory
     ["Cairo"]
+  },
+  palette : {
+    primary : {
+      main :"#b33030"
+    }
   }
 });
 function App() {

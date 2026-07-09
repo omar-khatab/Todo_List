@@ -40,6 +40,9 @@ function handleCheckClick () {
     return t
   })
   setTodos(updateTodo) 
+    // to reflect the change of isComplete on local storage >> local storage here don't need useEffect because we use it inside event handler call it or use it in case of enable this event handler like useEffect that
+    // enable in particular time(loading page or change dependencies), so localStorage.getItem need useEffect, but localStorage.setItem don't need useEffect because we put it inside event handler
+    localStorage.setItem("todos",JSON.stringify(updateTodo))   
 }
 
 // handle delete modal
@@ -55,6 +58,8 @@ function handleDeleteConfirm () {
         return t.id != todo.id
   })
   setTodos(updateTodo) 
+    // store last update to local storage during deleting   
+  localStorage.setItem("todos",JSON.stringify(updateTodo))  
 }
 // handle update modal
 function handleUpdateClick() {
@@ -73,6 +78,8 @@ function handleUpdateConfirm () {
     })
     setTodos(todoUpdate)
     setShowUpdateDialog(false)
+    // store last update to local storage during updating   
+    localStorage.setItem("todos",JSON.stringify(todoUpdate))  
 }
 
         return (
@@ -167,7 +174,7 @@ function handleUpdateConfirm () {
             <CardContent>
                 <Grid container spacing={2}>
                     <Grid size={8}>
-                        <Typography variant="h5" sx={{textAlign : "right"}}>
+                        <Typography variant="h5" sx={{textAlign : "right", textDecoration : todo.isComplete ? "line-through" : "none"}}>
                             {todo.title}           
                         </Typography>
                         <Typography variant="h6" sx={{textAlign : "right"}}>
